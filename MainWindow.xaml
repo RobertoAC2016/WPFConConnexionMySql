@@ -1,0 +1,63 @@
+﻿<Window x:Class="WPFConConnexionMySql.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFConConnexionMySql"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Label Content="Demo de guardado de datos en MySql" FontSize="30"/>
+        </DockPanel>
+        <DockPanel Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Label Content="Usuario" FontSize="30"/>
+            <TextBox Text="{Binding usuario, Mode=TwoWay}" Width="100"/>
+        </DockPanel>
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Label Content="Email" FontSize="30"/>
+            <TextBox Text="{Binding mail, Mode=TwoWay}" Width="100"/>
+        </DockPanel>
+        <DockPanel Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Label Content="Edad" FontSize="30"/>
+            <TextBox Text="{Binding edad, Mode=TwoWay}" Width="100"/>
+        </DockPanel>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="100,0,100,10">
+            <Button Content="Guardar" Background="LightBlue" BorderThickness="0" BorderBrush="Transparent" FontSize="20" FontWeight="Bold"
+                    Padding="5" Click="ComandoGuardar"/>
+        </StackPanel>
+        <!--
+        Ahora vamos a disbujar el control q mostrara los datos en esta area sobrante
+        
+        Agregare un scroll por si hay demasiados datos y necesitare desplazar verticalmente los registros
+        
+        Listo, a nivel de diseño ya esta todo preparado
+        -->
+        <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Margin="5">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="360">
+                <ListView ItemsSource="{Binding registros, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <Label Content="{Binding usuario}" FontWeight="Bold" FontSize="20"/>
+                                <Label Content="{Binding mail}" FontWeight="Bold" FontSize="20"/>
+                                <Label Content="{Binding edad}" FontWeight="Bold" FontSize="20"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Window>
